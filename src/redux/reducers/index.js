@@ -3,7 +3,7 @@ import { SET_INITIAL_VALUES, TRANSFER_CASH, NEXT_SCREEN } from "../constants";
 const initialState = {
     startingCash: 1500,
     players: [],
-    screen: "newGame"
+    screen: "home"
 };
 
 function rootReducer(state = initialState, action) {
@@ -12,7 +12,7 @@ function rootReducer(state = initialState, action) {
         const playersArray = [];
         const actionPlayersArray = action.payload.players;
         let startingCash = action.payload.startingCash;
-        if (startingCash = undefined) startingCash = 1500
+        if (startingCash === null) startingCash = 1500
         actionPlayersArray.forEach(player => {
             const playerObject = {name: player, cash: startingCash};
             playersArray.push(playerObject)
@@ -27,9 +27,11 @@ function rootReducer(state = initialState, action) {
         const amount = action.payload.amount;
         const from = action.payload.fromIndex;
         const to = action.payload.toIndex;
-        const playersArray = state.players;
+        const balance = action.payload.balance;
+        let playersArray = state.players;
+        console.log(balance, amount)
         if (from !== -1) {
-            if (amount > playersArray[from].cash) {
+            if (parseFloat(balance) < parseFloat(amount)) {
                 alert("You don't have that kind of money!")
                 return state;
             };

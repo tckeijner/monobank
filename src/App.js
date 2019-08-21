@@ -1,7 +1,9 @@
 import React from 'react';
 import './App.css';
+import Home from './components/Home';
 import NewGame from './components/NewGame';
 import Game from './components/Game';
+import NavBar from './components/NavBar';
 import {connect} from 'react-redux';
 
 const mapStateToProps = state => {
@@ -12,13 +14,27 @@ const mapStateToProps = state => {
 
 const ConnectedApp = ({screen}) => {
   switch (screen) {
+    case 'home':
+      return (
+        <div>
+          <NavBar />
+          <Home />
+        </div>
+        
+      );
     case "newGame":
       return (
-        <NewGame />
+        <div>
+          <NavBar />
+          <NewGame />
+        </div>
       );
     case "game":
       return (
-        <Game />
+        <div>
+          <NavBar />
+          <Game />
+        </div>
       );
     default: 
       return (

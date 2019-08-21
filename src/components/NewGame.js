@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { setInitialValues, nextScreen } from '../redux/actions/index';
+import {Container, Form, Button, ListGroup, Card} from 'react-bootstrap';
 
 const mapStateToProps = state => {
     return {
@@ -14,7 +15,6 @@ function mapDispatchToProps(dispatch) {
         setInitialValues: initialValues => dispatch(setInitialValues(initialValues)),
         nextScreen: screen => dispatch(nextScreen(screen))
     };
-
 };
 
 class ConnectedNewGame extends React.Component {
@@ -63,40 +63,56 @@ class ConnectedNewGame extends React.Component {
         const players = this.state.newPlayers;
         const list = players.map((player) => {
             return (
-                <li key={players.indexOf(player)}>{player}</li>  
+                <ListGroup.Item key={players.indexOf(player)}>{player}</ListGroup.Item>  
             )
         })
         return (
-            <ul>{list}</ul>
+            <ListGroup>{list}</ListGroup>
         )
     };
 
     render() {
         return(
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="title">Starting cash per player</label>
-                        <input 
+            <Container>
+                <Card className='mt-2'>
+                    <Card.Header>Set up a new game</Card.Header>
+                    <Card.Body>
+                        <Form 
+                onSubmit={this.handleSubmit}>
+                    <Form.Group className="form-group">
+                        <Form.Label>Starting money per player</Form.Label>
+                        <Form.Control 
                         type="number"
+                        placeholder="Enter amount"
                         onChange={this.handleCashChange}/>
-                    </div> 
+                        <Form.Text className="text-muted">
+                            Leave empty to use the default value of 1500
+                        </Form.Text>
+                    </Form.Group> 
                     {this.mapPlayersToList()}
-                    <div className="form-group">
-                        <label htmlFor="title">New Player</label>
-                        <input 
+                    <Form.Group className="form-group">
+                        <Form.Label htmlFor="title">New Player</Form.Label>
+                    <Form.Control 
                         type="text"
                         onChange={this.handleNewPlayerNameChange}
-                        min="2"
-                        max="8"
                         default=""
+                        placeholder="Enter player name"
                         ref={(ref) => this.mainInput= ref}/>
-                        <button onClick={this.handleAddNewPLayer}>Add player</button>
-                    </div>
-                    <button 
-                        type="submit" >Start Game</button>
-                </form>
-            </div>        
+                    <Button 
+                        onClick={this.handleAddNewPLayer}
+                        variant="primary" 
+                        type="submit"
+                        >Add player</Button>
+                    </Form.Group>
+                    <Button 
+                        variant="primary"
+                        onClick={this.handleSubmit} >Start Game</Button>
+                </Form>
+                    </Card.Body>
+                
+                </Card>
+                
+            </Container>        
         )
     }
 };

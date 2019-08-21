@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { transferCash } from '../redux/actions/index';
+import { Card, Form, Button, ButtonGroup} from 'react-bootstrap';
 
 const mapStateToProps = state => {
     return {
         startingCash: state.startingCash,
-        numPlayers: state.numPlayers,
         players: state.players,
     };
 };
@@ -21,7 +21,7 @@ class ConnectedGame extends React.Component {
         super(props)
 
         this.state = {
-            players: [],
+            players: this.props.players,
             bankTransfer: 0,
         };
 
@@ -30,7 +30,11 @@ class ConnectedGame extends React.Component {
         this.handleTransfer = this.handleTransfer.bind(this);
         this.handleTransferInputChange = this.handleTransferInputChange.bind(this);
     };
-
+    componentWillReceiveProps(nextProps) {
+        if (this.props.players !== nextProps.players) {
+            this.setState({users: nextProps.users});
+        }
+    }
     componentWillMount() {
         const propPlayers = this.props.players;
         let players = [];
@@ -39,6 +43,7 @@ class ConnectedGame extends React.Component {
             players.push(newPlayerObject);
         })
         this.setState({players: this.props.players})
+        console.log(this.state, this.props)
     };
 
     renderPayButtons(name, fromIndex) {
@@ -60,14 +65,17 @@ class ConnectedGame extends React.Component {
             const buttonKey = `${name}${buttonName}Button`
             const toIndex = playerNames.indexOf(buttonName)
             return (
-                    <button 
+                    <Button 
+                    variant="outline-primary"
                     key={buttonKey}
-                    onClick={ (e) => {this.handleTransfer(fromIndex, toIndex, e)}} >to {buttonName}</button>                    
+                    onClick={ (e) => {this.handleTransfer(fromIndex, toIndex, e)}} >{buttonName}</Button>                    
             );
         });
         const buttonsKey = `${name}ButtonRow`
         return (
-            <div key={buttonsKey}>{buttons}</div>
+            <ButtonGroup 
+            className="mb-3"
+            key={buttonsKey}>{buttons}</ButtonGroup>
         );
     };
 
@@ -76,23 +84,55 @@ class ConnectedGame extends React.Component {
         const list = players.map((player) => {
             const index = players.indexOf(player)
             return (
-                <div key={players.indexOf(player)}>
-                    <h1>{player.name}</h1>
-                    <h2>Cash: {player.cash}</h2>
-                    <form>
-                        <label>Pay</label>
-                        <input 
+                <div
+                className="col-sm m-2" 
+                key={players.indexOf(player)}>
+                    <Card>
+                    <Card.Header>{player.name}</Card.Header>
+                        <Card.Body>
+                            
+                    <Card.Text>Money: {player.cash}</Card.Text>
+                    <Form>
+                        <Form.Label>Pay</Form.Label>
+                        <Form.Control 
                         type="number"
                         onChange={(e)=>{this.handleTransferInputChange(index, e)}}
-                        default= {0}
+                        default= ""
+                        ref={(ref) => this.mainInput= ref}
                         />
                         {this.renderPayButtons(player.name, index)}
-                    </form>
+                    </Form>
+                        </Card.Body>
+                        
+                    </Card>
+                    
                 </div> 
             )
         })
         return (
-            <div>{list}</div>
+                <div className="row">
+                    <div className="col-sm m-2" key={[-1]}>
+                        <Card>
+                        <Card.Header>BANK</Card.Header>
+                            <Card.Body>
+                                
+                            <Card.Text>Money: unlimited</Card.Text>
+                    <Form>
+                        <Form.Label>Pay</Form.Label>
+                        <Form.Control 
+                        type="number"
+                        onChange={(e)=>{this.handleTransferInputChange(-1, e)}}
+                        default= {0}
+                        />
+                        {this.renderPayButtons("BANK", -1)}
+                    </Form>
+                            </Card.Body>
+                            
+                        </Card>
+
+                </div> 
+                {list}
+                </div>
         )
     };
 
@@ -115,30 +155,22 @@ class ConnectedGame extends React.Component {
         e.preventDefault();
         console.log(fromIndex, toIndex)
         let amount = 0
+        let balance = 999999999999
         if (fromIndex === -1) {
             amount = this.state.bankTransfer;
         } else {
             amount = this.state.players[fromIndex].transfer;
+            balance = this.state.players[fromIndex].cash;
         };
         console.log(amount)
-        this.props.transferCash({ amount, fromIndex, toIndex});
+        this.props.transferCash({ amount, fromIndex, toIndex, balance});
+        this.setState({newPlayerName: ""})
+        this.mainInput.value = "";
     };
 
     render () {
         return (
-            <div>
-                <div key={[-1]}>
-                    <h1>Bank</h1>
-                    <form>
-                        <label>Pay</label>
-                        <input 
-                        type="number"
-                        onChange={(e)=>{this.handleTransferInputChange(-1, e)}}
-                        default= {0}
-                        />
-                        {this.renderPayButtons("BANK", -1)}
-                    </form>
-                </div> 
+            <div className="container">
                 {this.renderPlayers()}
             </div>
         );
