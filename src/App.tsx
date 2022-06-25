@@ -6,21 +6,21 @@ import Game from './components/Game';
 import NavBar from './components/NavBar';
 import {connect} from 'react-redux';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: AppState) => {
   return {
       screen: state.screen
   };
 };
 
-const ConnectedApp = ({screen}) => {
-  switch (screen) {
+const ConnectedApp = (state: AppState) => {
+  switch (state.screen) {
     case 'home':
       return (
         <div>
           <NavBar />
           <Home />
         </div>
-        
+
       );
     case "newGame":
       return (
@@ -36,7 +36,7 @@ const ConnectedApp = ({screen}) => {
           <Game />
         </div>
       );
-    default: 
+    default:
       return (
         <div>
           You did something wrong mate!
@@ -49,3 +49,7 @@ const App = connect(mapStateToProps)(ConnectedApp);
 
 
 export default App;
+
+export interface AppState {
+    screen: string;
+}
