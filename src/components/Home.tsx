@@ -1,19 +1,13 @@
 import React from 'react';
 import {Container, Card, Button} from 'react-bootstrap';
-import {connect} from 'react-redux';
-import { nextScreen } from '../redux/actions';
-import {Dispatch} from "redux";
+import { nextScreen } from '../redux/reducers/gameSlice';
+import {useAppDispatch} from "../hooks";
 
-function mapDispatchToProps(dispatch: Dispatch) {
-    return {
-        nextScreen: (screen: string) => dispatch(nextScreen(screen))
-    };
-}
-
-function ConnectedHome(props: HomeProps) {
-    function handleClick(e: any) {
+export default function Home() {
+    const dispatch = useAppDispatch();
+    function handleClick(e: React.MouseEvent<HTMLElement>) {
         e.preventDefault();
-        props.nextScreen("newGame")
+        dispatch(nextScreen({screen: 'newGame'}))
     }
 
     return (
@@ -32,11 +26,4 @@ function ConnectedHome(props: HomeProps) {
             </Card>
         </Container>
     )
-}
-
-const Home = connect(null, mapDispatchToProps)(ConnectedHome);
-export default Home;
-
-export interface HomeProps {
-    nextScreen: (nextScreen: string) => void;
 }
