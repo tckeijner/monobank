@@ -11,13 +11,9 @@ export default function Game() {
     }
 
     return (
-        <div className="container">
+        <div className='gameGrid cardContainer'>
             {renderPlayers()}
         </div>
     );
 
 }
-
-// const Game = connect(mapStateToProps, mapDispatchToProps)(ConnectedGame);
-//
-// export default Game;

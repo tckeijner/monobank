@@ -1,5 +1,4 @@
 import React from 'react';
-import {Container, Card, Button} from 'react-bootstrap';
 import { nextScreen } from '../redux/reducers/gameSlice';
 import {useAppDispatch} from "../hooks";
 
@@ -11,19 +10,19 @@ export default function Home() {
     }
 
     return (
-        <Container>
-            <Card className='mt-2'>
-                <Card.Header>Home</Card.Header>
-                <Card.Body>
-                    <Card.Text>
+        <div className='cardContainer'>
+            <div className='subCard'>
+                <h1>Hi there, my fellow capitalists!</h1>
+                <div>
+                    <p>
                         Do you love playing Monopoly, but are you tired of all the fumbling around with the paper money? With this app: no more cheating! No more counting. Just set up a game and your banker can control who pays whom!
-                    </Card.Text>
-                    <Button
+                    </p>
+                    <button
                         onClick={handleClick}>
                         New Game
-                    </Button>
-                </Card.Body>
-            </Card>
-        </Container>
+                    </button>
+                </div>
+            </div>
+        </div>
     )
 }
