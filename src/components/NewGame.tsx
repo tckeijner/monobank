@@ -1,5 +1,4 @@
 import React from 'react';
-import {Container, Form, Button, ListGroup, Card} from 'react-bootstrap';
 import {addNewPlayer, setCashFormVal, setNewPlayerName} from "../redux/reducers/newGameSlice";
 import {nextScreen, setInitialValues} from "../redux/reducers/gameSlice";
 import {useAppDispatch, useAppSelector} from "../hooks";
@@ -34,54 +33,50 @@ export default function NewGame() {
     function mapPlayersToList() {
         const list = newPlayers.map((player, index) => {
             return (
-                <ListGroup.Item key={index}>{player}</ListGroup.Item>
+                <li key={index}>{player}</li>
             )
         })
         return (
-            <ListGroup>{list}</ListGroup>
+            <ul>{list}</ul>
         )
     }
 
     return (
-        <Container>
-            <Card className='mt-2'>
-                <Card.Header>Set up a new game</Card.Header>
-                <Card.Body>
-                    <Form
+        <div>
+            <div className='mt-2'>
+                <h1>Set up a new game</h1>
+                <div>
+                    <form
                         onSubmit={handleSubmit}>
-                        <Form.Group className="form-group">
-                            <Form.Label>Starting money per player</Form.Label>
-                            <Form.Control
-                                type="number"
-                                placeholder="Enter amount"
-                                onChange={handleCashChange}/>
-                            <Form.Text className="text-muted">
-                                Leave empty to use the default value of 1500
-                            </Form.Text>
-                        </Form.Group>
+                        <label>Starting money per player</label>
+                        <input
+                            type="number"
+                            placeholder="Enter amount"
+                            onChange={handleCashChange}/>
+                        <p className="text-muted">
+                            Leave empty to use the default value of 1500
+                        </p>
                         {mapPlayersToList()}
-                        <Form.Group className="form-group">
-                            <Form.Label htmlFor="title">New Player</Form.Label>
-                            <Form.Control
-                                type="text"
-                                onChange={handleNewPlayerNameChange}
-                                placeholder="Enter player name"
-                                ref={(ref: any) => mainInput=ref}
-                            />
-                            <Button
-                                onClick={handleAddNewPLayer}
-                                variant="primary"
-                                type="submit"
-                            >Add player</Button>
-                        </Form.Group>
-                        <Button
-                            variant="primary"
-                            onClick={handleSubmit} >Start Game</Button>
-                    </Form>
-                </Card.Body>
+                        <label htmlFor="title">New Player</label>
+                        <input
+                            type="text"
+                            onChange={handleNewPlayerNameChange}
+                            placeholder="Enter player name"
+                            ref={(ref: any) => mainInput = ref}
+                        />
+                        <button
+                            onClick={handleAddNewPLayer}
+                            type="submit"
+                        >Add player
+                        </button>
+                        <button
+                            onClick={handleSubmit}>Start Game
+                        </button>
+                    </form>
+                </div>
 
-            </Card>
+            </div>
 
-        </Container>
+        </div>
     )
 }

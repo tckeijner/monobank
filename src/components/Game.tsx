@@ -17,7 +17,3 @@ export default function Game() {
     );
 
 }
-
-// const Game = connect(mapStateToProps, mapDispatchToProps)(ConnectedGame);
-//
-// export default Game;

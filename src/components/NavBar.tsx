@@ -1,11 +1,10 @@
 import React from 'react';
-import {Navbar} from 'react-bootstrap';
 
 const NavBar = () => {
     return (
-        <Navbar bg="light" variant="light">
-            <Navbar.Brand href="#home">MonoBanking</Navbar.Brand>
-        </Navbar>
+        <div>
+            <a href="#home">MonoBanking</a>
+        </div>
     );
 };
 
