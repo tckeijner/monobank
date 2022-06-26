@@ -31,23 +31,30 @@ export default function NewGame() {
     }
 
     function mapPlayersToList() {
-        const list = newPlayers.map((player, index) => {
+        if (newPlayers) {
+            const list = newPlayers.map((player, index) => {
+                return (
+                    <div key={index}>{player}</div>
+                )
+            })
             return (
-                <li key={index}>{player}</li>
+                <div className='subCard newPlayersCard'>
+                    <div>{list}</div>
+                    <button
+                        onClick={handleSubmit}>Start Game
+                    </button>
+                </div>
             )
-        })
-        return (
-            <ul>{list}</ul>
-        )
+        }
     }
 
     return (
-        <div>
-            <div className='mt-2'>
+        <div className='cardContainer'>
+            <form onSubmit={handleSubmit}>
                 <h1>Set up a new game</h1>
-                <div>
-                    <form
-                        onSubmit={handleSubmit}>
+
+                <div className='newGameContainer'>
+                    <div className='subCard startingMoneyCard'>
                         <label>Starting money per player</label>
                         <input
                             type="number"
@@ -56,8 +63,8 @@ export default function NewGame() {
                         <p className="text-muted">
                             Leave empty to use the default value of 1500
                         </p>
-                        {mapPlayersToList()}
-                        <label htmlFor="title">New Player</label>
+                    </div>
+                    <div className='subCard newPlayerFieldCard'><label htmlFor="title">New Player</label>
                         <input
                             type="text"
                             onChange={handleNewPlayerNameChange}
@@ -69,14 +76,10 @@ export default function NewGame() {
                             type="submit"
                         >Add player
                         </button>
-                        <button
-                            onClick={handleSubmit}>Start Game
-                        </button>
-                    </form>
+                    </div>
+                    {mapPlayersToList()}
                 </div>
-
-            </div>
-
+            </form>
         </div>
     )
 }

@@ -10,9 +10,9 @@ export default function Home() {
     }
 
     return (
-        <div>
-            <div>
-                <div>Home</div>
+        <div className='cardContainer'>
+            <div className='subCard'>
+                <h1>Hi there, my fellow capitalists!</h1>
                 <div>
                     <p>
                         Do you love playing Monopoly, but are you tired of all the fumbling around with the paper money? With this app: no more cheating! No more counting. Just set up a game and your banker can control who pays whom!

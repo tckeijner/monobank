@@ -3,14 +3,14 @@ import {Player, transferCash} from "../redux/reducers/gameSlice";
 import {useAppDispatch, useAppSelector} from "../hooks";
 import {RootState} from "../redux/store";
 
-export default function PlayerCard(props: {player: Player, index: number}) {
+export default function PlayerCard(props: { player: Player, index: number }) {
     const dispatch = useAppDispatch();
     const {players} = useAppSelector((state: RootState) => state.game)
     let mainInput: any;
 
     function handleTransfer(fromIndex: number, toIndex: number, e: any) {
         e.preventDefault();
-        dispatch(transferCash({ amount: +mainInput.value, fromIndex, toIndex}))
+        dispatch(transferCash({amount: +mainInput.value, fromIndex, toIndex}))
         mainInput.value = "";
     }
 
@@ -31,37 +31,33 @@ export default function PlayerCard(props: {player: Player, index: number}) {
             return (
                 <button
                     key={buttonKey}
-                    onClick={ (e: any) => {handleTransfer(fromIndex, toIndex, e)}} >{buttonName}</button>
+                    onClick={(e: any) => {
+                        handleTransfer(fromIndex, toIndex, e)
+                    }}>{buttonName}</button>
             );
         });
         const buttonsKey = `${name}ButtonRow`
         return (
             <div
-                className="mb-3"
+                className='payButtonGrid'
                 key={buttonsKey}>{buttons}</div>
         );
     }
 
     return (
         <div
-            className="col-sm m-2"
+            className="subCard"
             key={props.index}>
-            <div>
-                <h1>{props.player.name}</h1>
-                <div>
-
-                    <p>Money: {players[props.index
-                        ].cash}</p>
-                    <form>
-                        <label>Pay</label>
-                        <input
-                            type="number"
-                            ref={(ref: any) => mainInput= ref}
-                        />
-                        {renderPayButtons(props.player.name, props.index)}
-                    </form>
+            <form>
+                <div className='playerForm'><h1>{props.player.name}</h1>
+                    <p>Money: {players[props.index].cash}</p>
+                    <label>Pay</label>
+                    <input type="number"
+                           ref={(ref: any) => mainInput = ref}/>
+                    <label>To</label>
+                    {renderPayButtons(props.player.name, props.index)}
                 </div>
-            </div>
+            </form>
         </div>
     )
 }

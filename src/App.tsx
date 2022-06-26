@@ -1,40 +1,36 @@
 import React from 'react';
-import './App.css';
 import Home from './components/Home';
 import NewGame from './components/NewGame';
 import Game from './components/Game';
-import NavBar from './components/NavBar';
 import {RootState} from "./redux/store";
 import {useAppSelector} from "./hooks";
+import './styles/styles.scss'
 
 export default function App() {
     const screen = useAppSelector((state: RootState) => state.game.screen)
     switch (screen) {
         case 'home':
             return (
-                <div>
-                    <NavBar/>
+                <div className='appContainer'>
                     <Home/>
                 </div>
 
             );
         case "newGame":
             return (
-                <div>
-                    <NavBar/>
+                <div className='appContainer'>
                     <NewGame/>
                 </div>
             );
         case "game":
             return (
-                <div>
-                    <NavBar/>
+                <div className='appContainer'>
                     <Game/>
                 </div>
             );
         default:
             return (
-                <div>
+                <div className='appContainer'>
                     You did something wrong mate!
                 </div>
             )
