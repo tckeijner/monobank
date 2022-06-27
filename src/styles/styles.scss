@@ -74,6 +74,15 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
+.moneyLabel {
+  font-family: 'Inconsolata', monospace;
+  font-size: large;
+  background-color: black;
+  color: lightgreen;
+  border-radius: 5px;
+  padding: 6px 10px 6px 10px;
+}
+
 button {
   background-color: $mint-cream;
   border: 2px solid $kombu-green;

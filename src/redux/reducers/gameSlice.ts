@@ -16,7 +16,7 @@ const initialState: GameState = {
     startingCash: 1500,
     players: [{
         name: 'BANK',
-        cash: 9999999999999,
+        cash: 999999,
     }],
     screen: "home",
     numPlayers: 0,
