@@ -2,6 +2,7 @@ import React from "react";
 import {Player, transferCash} from "../redux/reducers/gameSlice";
 import {useAppDispatch, useAppSelector} from "../hooks";
 import {RootState} from "../redux/store";
+import MoneyLabel from "./MoneyLabel";
 
 export default function PlayerCard(props: { player: Player, index: number }) {
     const dispatch = useAppDispatch();
@@ -50,7 +51,7 @@ export default function PlayerCard(props: { player: Player, index: number }) {
             key={props.index}>
             <form>
                 <div className='playerForm'><h1>{props.player.name}</h1>
-                    <p>Money: {players[props.index].cash}</p>
+                    <MoneyLabel newValue={players[props.index].cash}/>
                     <label>Pay</label>
                     <input type="number"
                            ref={(ref: any) => mainInput = ref}/>
