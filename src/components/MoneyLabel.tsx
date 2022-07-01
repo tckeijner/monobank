@@ -19,14 +19,14 @@ export default function MoneyLabel(props: MoneyLabelProps) {
                 localLabelValue += increment
                 if ((increment > 0 && localLabelValue < newValue) ||
                     (increment < 0 && localLabelValue > newValue)) {
-                    setLabelValue(label => Math.floor(label + increment))
+                    setLabelValue(() => Math.floor(localLabelValue + increment))
                 } else {
                     setLabelValue(() => newValue);
                     clearInterval(interval)
                 }
             }, 1)
         }
-    }, [props.newValue, currentValue, labelValue, setLabelValue, updateCurrentValue])
+    }, [props.newValue])
 
     return (
         <div className='moneyLabel' >$ {labelValue}</div>
