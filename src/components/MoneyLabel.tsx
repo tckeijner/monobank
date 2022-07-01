@@ -8,6 +8,10 @@ export default function MoneyLabel(props: MoneyLabelProps) {
     let [currentValue, updateCurrentValue] = useState(0);
     const [labelValue, setLabelValue] = useState(0)
 
+    /*
+    * useEffect hook that triggers whenever a new value is passed.
+    * This creates a visual effect for the money label to increase as a counter
+    */
     useEffect(() => {
         const newValue = props.newValue;
         if (currentValue !== newValue) {

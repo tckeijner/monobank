@@ -1,6 +1,6 @@
 import React from "react";
 import {Player, transferCash} from "../redux/reducers/gameSlice";
-import {useAppDispatch, useAppSelector} from "../hooks";
+import {useAppDispatch, useAppSelector} from "../redux/store/hooks";
 import {RootState} from "../redux/store";
 import MoneyLabel from "./MoneyLabel";
 
@@ -15,6 +15,10 @@ export default function PlayerCard(props: { player: Player, index: number }) {
         mainInput.value = "";
     }
 
+    /*
+    * Renders the buttons where the player can choose to which other player the amount should be transferred.
+    * The player itself should obviously not be included.
+    */
     function renderPayButtons(name: string, fromIndex: number) {
         const playerNames = players.map(player => {
             return player.name;

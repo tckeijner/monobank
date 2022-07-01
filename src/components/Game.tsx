@@ -1,5 +1,5 @@
 import React from 'react';
-import {useAppSelector} from "../hooks";
+import {useAppSelector} from "../redux/store/hooks";
 import {RootState} from "../redux/store";
 import PlayerCard from "./PlayerCard";
 
