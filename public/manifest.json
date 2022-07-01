@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "MonoBank",
+  "name": "MonoBank, the Monopoly Banker",
   "icons": [
     {
       "src": "favicon.ico",

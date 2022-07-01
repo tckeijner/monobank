@@ -1,6 +1,6 @@
 import React from 'react';
 import { nextScreen } from '../redux/reducers/gameSlice';
-import {useAppDispatch} from "../hooks";
+import {useAppDispatch} from "../redux/store/hooks";
 
 export default function Home() {
     const dispatch = useAppDispatch();

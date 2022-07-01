@@ -3,7 +3,7 @@ import Home from './components/Home';
 import NewGame from './components/NewGame';
 import Game from './components/Game';
 import {RootState} from "./redux/store";
-import {useAppSelector} from "./hooks";
+import {useAppSelector} from "./redux/store/hooks";
 import './styles/styles.scss'
 
 export default function App() {

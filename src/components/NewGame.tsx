@@ -1,7 +1,7 @@
 import React from 'react';
 import {addNewPlayer, setCashFormVal, setNewPlayerName} from "../redux/reducers/newGameSlice";
 import {nextScreen, setInitialValues} from "../redux/reducers/gameSlice";
-import {useAppDispatch, useAppSelector} from "../hooks";
+import {useAppDispatch, useAppSelector} from "../redux/store/hooks";
 import {RootState} from "../redux/store";
 
 export default function NewGame() {
