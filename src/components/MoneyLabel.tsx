@@ -30,7 +30,7 @@ export default function MoneyLabel(props: MoneyLabelProps) {
                 }
             }, 1)
         }
-    }, [props.newValue])
+    }, [currentValue, props.newValue])
 
     return (
         <div className='moneyLabel' >$ {labelValue}</div>
